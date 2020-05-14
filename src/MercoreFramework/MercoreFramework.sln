@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MercoreFramework", "MercoreFramework\MercoreFramework.csproj", "{0EE53FF8-7AFF-4CA7-8E76-C349B69CD627}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Databese", "Databese", "{79410ACB-535F-40E2-B65C-774087D4BBB6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cache", "Cache", "{B5D6970B-DAE7-42B4-808F-158A832091D3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FileStored", "FileStored", "{6D46D349-E6C4-4EE3-867F-88AFDE919752}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Log", "Log", "{63400DC5-46F9-4AC2-B561-0A44FF9D6ABE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{CDCAF95A-9CFD-4AB0-836B-5709AFA04BB1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MessageBroker", "MessageBroker", "{0831A7E6-7E26-460D-AD17-F34C9D6ABC35}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MessageService", "MessageService", "{39053628-0FC3-4F99-910D-E0C2892AAAA1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PushNotification", "PushNotification", "{113D6DA7-7612-41B8-B07F-5910540FA68C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Search", "Search", "{959B057D-6C07-4172-96F2-185D75F43C3C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0EE53FF8-7AFF-4CA7-8E76-C349B69CD627}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EE53FF8-7AFF-4CA7-8E76-C349B69CD627}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EE53FF8-7AFF-4CA7-8E76-C349B69CD627}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EE53FF8-7AFF-4CA7-8E76-C349B69CD627}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7FABCA78-763A-48C8-8991-4B96AE2B8896}
+	EndGlobalSection
+EndGlobal
