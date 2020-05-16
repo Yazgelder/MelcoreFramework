@@ -29,14 +29,14 @@ namespace MercoreFramework.FileStored
         /// Kovada / Klasörde ana dizinde olan dosyaların hepsini getirir
         /// </summary>
         /// <returns>Dosya listesi</returns>
-        Task<IFileInfo> GetList();
+        Task<List<IFileInfo>> GetList();
 
         /// <summary>
         /// Kovada / Klasörde ki verilen başlangıca/Alt klasöre göre getirir
         /// </summary>
         /// <param name="prefix">Alt Klasör adı</param>
         /// <returns>Dosya listesi</returns>
-        Task<IFileInfo> GetList(string prefix);
+        Task<List<IFileInfo>> GetList(string prefix);
 
         /// <summary>
         /// Dosyanın kontrolunu yapar
