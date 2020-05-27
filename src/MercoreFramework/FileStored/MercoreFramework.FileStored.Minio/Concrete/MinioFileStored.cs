@@ -104,11 +104,10 @@ namespace MercoreFramework.FileStored.Minio.Concrete
             var fullName = $"http{(_fileParameter.IsSSL ? "s" : "")}://{_fileParameter.EndPoint}/{_fileParameter.Bucket}";
             if (string.IsNullOrEmpty(prefix))
                 prefix = null;
-            var lst = _minioClient.ListObjectsAsync(_fileParameter.Bucket, prefix,true);
-            var t= lst.ToEnumerable().Select(item => new FileInfo() { BucketName = _fileParameter.Bucket, Name = item.Key, Size = Convert.ToInt64(item.Size), FullName = fullName + "/" + item.Key });
+            var lst = _minioClient.ListObjectsAsync(_fileParameter.Bucket, prefix, true);
+            var t = lst.ToEnumerable().Select(item => new FileInfo() { BucketName = _fileParameter.Bucket, Name = item.Key, Size = Convert.ToInt64(item.Size), FullName = fullName + "/" + item.Key });
             list.AddRange(t.ToList());
             return list;
-      
         }
 
         private void CheckAndCreadBucket(string bucket)

@@ -12,7 +12,6 @@ using System.Text;
 
 namespace MercoreFramework.FileStored.AmazonS3.Test
 {
- 
     public class AmazonS3Test
     {
         private const string dllName = "MercoreFramework.dll";
@@ -48,7 +47,6 @@ namespace MercoreFramework.FileStored.AmazonS3.Test
                         Guid.NewGuid().ToString("N"),
                         Guid.NewGuid().ToString("N")};
         }
-
 
         [Test, Order(1)]
         public void SaveStreamFile()
@@ -96,7 +94,6 @@ namespace MercoreFramework.FileStored.AmazonS3.Test
             Assert.AreEqual(fileName.Count + 1, lst.Count);
             lst = service.GetList(directory + @"/MercoreFramework").Result;
             Assert.AreEqual(1, lst.Count);
-
         }
 
         [Test, Order(5)]
@@ -146,5 +143,4 @@ namespace MercoreFramework.FileStored.AmazonS3.Test
             }
         }
     }
-
 }
