@@ -16,6 +16,7 @@
         /// Dosya Adı
         /// </summary>
         public string Name { get; set; }
+
         /// <summary>
         /// Dosyanın Büyüklüğü
         /// </summary>

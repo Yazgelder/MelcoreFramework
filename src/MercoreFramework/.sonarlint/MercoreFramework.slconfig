@@ -1,0 +1,12 @@
+{
+  "ServerUri": "http://sonar.software.moda",
+  "Organization": null,
+  "ProjectKey": "MF",
+  "ProjectName": "Melcore Framework",
+  "Profiles": {
+    "CSharp": {
+      "ProfileKey": "AXJJd3aUUikiNVsrvQ9o",
+      "ProfileTimestamp": "2020-05-25T01:34:25Z"
+    }
+  }
+}

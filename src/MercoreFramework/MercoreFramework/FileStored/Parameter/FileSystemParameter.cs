@@ -26,5 +26,10 @@
         /// Amazon S3 için verilen Endpoind
         /// </summary>
         public string EndPoint { get; set; }
+
+        /// <summary>
+        /// SSL Kullanılıyormu? minio
+        /// </summary>
+        public bool IsSSL { get; set; }
     }
 }

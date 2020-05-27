@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MercoreFramework.Loger
+﻿namespace MercoreFramework.Loger
 {
-    public enum LogType:byte
+    public enum LogType : byte
     {
-        None=0,
-        AuditLog=1,
-        ErrorLog=2,
-        Validation=3,
-        LoginLog=4
-
+        None = 0,
+        AuditLog = 1,
+        ErrorLog = 2,
+        Validation = 3,
+        LoginLog = 4
     }
 }

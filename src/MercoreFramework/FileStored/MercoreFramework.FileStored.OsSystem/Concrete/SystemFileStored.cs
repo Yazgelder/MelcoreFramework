@@ -3,6 +3,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,7 +23,7 @@ namespace MercoreFramework.FileStored.OsSystem.Concrete
 
         public Task DeleteAll()
         {
-            var d = new System.IO.DirectoryInfo(this.GetLocation());
+            var d = new DirectoryInfo(this.GetLocation());
             d.GetDirectories().AsParallel().ForAll((x) => { x.Delete(true); });
             d.GetFiles().AsParallel().ForAll((x) => { x.Delete(); });
             return Task.CompletedTask;
@@ -30,18 +31,18 @@ namespace MercoreFramework.FileStored.OsSystem.Concrete
 
         public Task<bool> DeleteFile(string name)
         {
-            System.IO.FileInfo f = new System.IO.FileInfo(System.IO.Path.Combine(GetLocation(), name));
+            System.IO.FileInfo f = new System.IO.FileInfo(Path.Combine(GetLocation(), name));
             if (f.Exists)
             {
                 f.Delete();
-                return Task.FromResult<bool>(true);
+                return Task.FromResult(true);
             }
-            return Task.FromResult<bool>(false);
+            return Task.FromResult(false);
         }
 
         public async Task<Stream> Get(string name)
         {
-            System.IO.FileInfo f = new System.IO.FileInfo(System.IO.Path.Combine(GetLocation(), name));
+            System.IO.FileInfo f = new System.IO.FileInfo(Path.Combine(GetLocation(), name));
             if (f.Exists)
             {
                 MemoryStream mr = new MemoryStream();
@@ -58,30 +59,27 @@ namespace MercoreFramework.FileStored.OsSystem.Concrete
 
         public Task<List<IFileInfo>> GetList()
         {
-            return Task.FromResult<List<IFileInfo>>(GetDirectories(this.GetLocation()));
+            return Task.FromResult(GetDirectories(this.GetLocation()));
         }
 
         public Task<List<IFileInfo>> GetList(string prefix)
         {
-            return Task.FromResult<List<IFileInfo>>(GetDirectories(this.GetLocation(), prefix));
+            return Task.FromResult(GetDirectories(this.GetLocation(), prefix));
         }
 
         public Task<bool> IsExities(string name)
         {
-            System.IO.FileInfo f = new System.IO.FileInfo(System.IO.Path.Combine(GetLocation(), name));
+            System.IO.FileInfo f = new System.IO.FileInfo(Path.Combine(GetLocation(), name));
             return Task.FromResult(f.Exists);
         }
 
         public Task SaveFile(Stream stream, string name)
         {
-            if (!name.Contains(":"))
-            {
-                name = System.IO.Path.Combine(GetLocation(), name);
-            }
+            name = CheckLocation(name);
 
             System.IO.FileInfo d = new System.IO.FileInfo(name);
             if (d.Exists)
-                throw new System.IO.EndOfStreamException(name);
+                throw new EndOfStreamException(name);
 
             using (var f = d.OpenWrite())
             {
@@ -95,18 +93,15 @@ namespace MercoreFramework.FileStored.OsSystem.Concrete
         {
             if (!tempName.Contains(":"))
             {
-                tempName = System.IO.Path.Combine(GetLocation(), tempName);
+                tempName = Path.Combine(GetLocation(), tempName);
             }
-            if (!name.Contains(":"))
-            {
-                name = System.IO.Path.Combine(GetLocation(), name);
-            }
+            name = CheckLocation(name);
             System.IO.FileInfo s = new System.IO.FileInfo(tempName);
             if (!s.Exists)
-                throw new System.IO.FileNotFoundException(tempName);
+                throw new FileNotFoundException(tempName);
             System.IO.FileInfo d = new System.IO.FileInfo(name);
             if (d.Exists)
-                throw new System.IO.EndOfStreamException(name);
+                throw new EndOfStreamException(name);
 
             s.CopyTo(name);
             return Task.CompletedTask;
@@ -115,7 +110,7 @@ namespace MercoreFramework.FileStored.OsSystem.Concrete
         private List<IFileInfo> GetDirectories(string directory)
         {
             List<IFileInfo> list = new List<IFileInfo>();
-            var d = new System.IO.DirectoryInfo(directory);
+            var d = new DirectoryInfo(directory);
             if (!d.Exists)
             {
                 return list;
@@ -155,7 +150,7 @@ namespace MercoreFramework.FileStored.OsSystem.Concrete
                 array.RemoveAt(array.Count - 1);
                 var dic = string.Join(@"\", array.ToArray());
                 //Son kismı dosya başkangıcı ola
-                DirectoryInfo di = new DirectoryInfo(System.IO.Path.Combine(directory, dic));
+                DirectoryInfo di = new DirectoryInfo(Path.Combine(directory, dic));
                 if (di.Exists)
                 {
                     di.GetFiles(lst.Last() + "*").AsParallel().ForAll((x) =>
@@ -177,17 +172,39 @@ namespace MercoreFramework.FileStored.OsSystem.Concrete
             }
             else
             {
-                start = System.IO.Path.Combine(_hostEnvironment.ContentRootPath, "wwwroot");
+                start = Path.Combine(_hostEnvironment.ContentRootPath, "wwwroot");
             }
 
             if (!string.IsNullOrEmpty(_fileParameter.Bucket))
             {
-                return System.IO.Path.Combine(start, _fileParameter.Bucket);
+                return Path.Combine(start, _fileParameter.Bucket);
             }
             else
             {
                 return start;
             }
+        }
+
+        private string CheckLocation(string name)
+        {
+            name = name.Replace("/", @"\");
+            if (!name.Contains(":"))
+            {
+                name = Path.Combine(GetLocation(), name);
+            }
+            var last = name.LastIndexOf(@"\");
+            if (last == -1)
+            {
+                throw new DirectoryNotFoundException(name);
+            }
+            var directory = name.Substring(0, last);
+            DirectoryInfo di = new DirectoryInfo(directory);
+            if (!di.Exists)
+            {
+                di.Create();
+            }
+            Debug.Write(name);
+            return name;
         }
     }
 }
