@@ -6,6 +6,8 @@ namespace MelcoreFramework.FileStored
 {
     public interface IFileSystem
     {
+        #region Public Methods
+
         /// <summary>
         /// Kovadaki / Klasördeki Tüm dosyaları Temizler
         /// </summary>
@@ -61,5 +63,7 @@ namespace MelcoreFramework.FileStored
         /// <param name="name">Dosyanın Kaydedilmesi istenen adı</param>
         /// <returns>task</returns>
         Task SaveFile(string tempName, string name);
+
+        #endregion Public Methods
     }
 }

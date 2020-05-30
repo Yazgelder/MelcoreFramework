@@ -12,14 +12,26 @@ namespace MelcoreFramework.FileStored.OsSystem.Concrete
 {
     public class SystemFileStored : IFileSystem
     {
-        private readonly IHostEnvironment _hostEnvironment;
+        #region Private Fields
+
         private readonly FileSystemParameter _fileParameter;
+        private readonly IHostEnvironment _hostEnvironment;
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         public SystemFileStored(IOptions<FileSystemParameter> fileParameter, IHostEnvironment hostEnvironment)
         {
             _fileParameter = fileParameter.Value;
             _hostEnvironment = hostEnvironment;
         }
+
+        #endregion Public Constructors
+
+
+
+        #region Public Methods
 
         public Task DeleteAll()
         {
@@ -107,6 +119,34 @@ namespace MelcoreFramework.FileStored.OsSystem.Concrete
             return Task.CompletedTask;
         }
 
+        #endregion Public Methods
+
+
+
+        #region Private Methods
+
+        private string CheckLocation(string name)
+        {
+            name = name.Replace("/", @"\");
+            if (!name.Contains(":"))
+            {
+                name = Path.Combine(GetLocation(), name);
+            }
+            var last = name.LastIndexOf(@"\");
+            if (last == -1)
+            {
+                throw new DirectoryNotFoundException(name);
+            }
+            var directory = name.Substring(0, last);
+            DirectoryInfo di = new DirectoryInfo(directory);
+            if (!di.Exists)
+            {
+                di.Create();
+            }
+            Debug.Write(name);
+            return name;
+        }
+
         private List<IFileInfo> GetDirectories(string directory)
         {
             List<IFileInfo> list = new List<IFileInfo>();
@@ -185,26 +225,6 @@ namespace MelcoreFramework.FileStored.OsSystem.Concrete
             }
         }
 
-        private string CheckLocation(string name)
-        {
-            name = name.Replace("/", @"\");
-            if (!name.Contains(":"))
-            {
-                name = Path.Combine(GetLocation(), name);
-            }
-            var last = name.LastIndexOf(@"\");
-            if (last == -1)
-            {
-                throw new DirectoryNotFoundException(name);
-            }
-            var directory = name.Substring(0, last);
-            DirectoryInfo di = new DirectoryInfo(directory);
-            if (!di.Exists)
-            {
-                di.Create();
-            }
-            Debug.Write(name);
-            return name;
-        }
+        #endregion Private Methods
     }
 }

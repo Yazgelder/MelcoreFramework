@@ -2,6 +2,13 @@
 {
     public class FileSystemParameter : IFileSystemParameter
     {
+        #region Public Properties
+
+        /// <summary>
+        /// Sistem tarafından verilen Key
+        /// </summary>
+        public string AccessKey { get; set; }
+
         /// <summary>
         /// Url veya sistemdeki kaydedilecek dosyas yolu
         /// </summary>
@@ -13,16 +20,6 @@
         public string Bucket { get; set; }
 
         /// <summary>
-        /// Sistem tarafından verilen Key
-        /// </summary>
-        public string AccessKey { get; set; }
-
-        /// <summary>
-        /// Sistem tarafımdan verilen key
-        /// </summary>
-        public string SecretKey { get; set; }
-
-        /// <summary>
         /// Amazon S3 için verilen Endpoind
         /// </summary>
         public string EndPoint { get; set; }
@@ -31,5 +28,12 @@
         /// SSL Kullanılıyormu? minio
         /// </summary>
         public bool IsSSL { get; set; }
+
+        /// <summary>
+        /// Sistem tarafımdan verilen key
+        /// </summary>
+        public string SecretKey { get; set; }
+
+        #endregion Public Properties
     }
 }

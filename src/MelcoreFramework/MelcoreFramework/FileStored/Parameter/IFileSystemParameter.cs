@@ -2,6 +2,13 @@
 {
     public interface IFileSystemParameter
     {
+        #region Public Properties
+
+        /// <summary>
+        /// Sistem tarafından verilen Key
+        /// </summary>
+        string AccessKey { get; set; }
+
         /// <summary>
         /// Url veya sistemdeki kaydedilecek dosyas yolu
         /// </summary>
@@ -13,18 +20,15 @@
         string Bucket { get; set; }
 
         /// <summary>
-        /// Sistem tarafından verilen Key
+        /// Amazon S3 için verilen Endpoind
         /// </summary>
-        string AccessKey { get; set; }
+        string EndPoint { get; set; }
 
         /// <summary>
         /// Sistem tarafımdan verilen key
         /// </summary>
         string SecretKey { get; set; }
 
-        /// <summary>
-        /// Amazon S3 için verilen Endpoind
-        /// </summary>
-        string EndPoint { get; set; }
+        #endregion Public Properties
     }
 }

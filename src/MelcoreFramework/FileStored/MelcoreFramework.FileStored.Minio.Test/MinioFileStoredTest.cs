@@ -14,10 +14,16 @@ namespace MelcoreFramework.FileStored.Minio.Test
 {
     public class MinioFileStoredTest
     {
+        #region Private Fields
+
         private const string dllName = "MelcoreFramework.dll";
-        private readonly ServiceProvider serviceProvider;
-        private readonly List<string> fileName = null;
         private readonly string directory;
+        private readonly List<string> fileName = null;
+        private readonly ServiceProvider serviceProvider;
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         public MinioFileStoredTest()
         {
@@ -48,66 +54,25 @@ namespace MelcoreFramework.FileStored.Minio.Test
                         Guid.NewGuid().ToString("N")};
         }
 
-        [Test, Order(1)]
-        public void SaveStreamFile()
+        #endregion Public Constructors
+
+
+
+        #region Public Methods
+
+        [Test, Order(7)]
+        public void DeleteAll()
         {
             var service = serviceProvider.GetService<IFileSystem>();
-            foreach (var item in fileName)
-            {
-                byte[] byteArray = Encoding.ASCII.GetBytes(Guid.NewGuid().ToString("N"));
-                using MemoryStream stream = new MemoryStream(byteArray);
-                service.SaveFile(stream, directory + @"/" + item + ".txt").Wait();
-            }
-
-            Assert.Pass();
-        }
-
-        [Test, Order(2)]
-        public void SavePhysicalFile()
-        {
-            var service = serviceProvider.GetService<IFileSystem>();
-            service.SaveFile(System.IO.Path.Combine(TestContext.CurrentContext.TestDirectory, dllName), directory + @"/" + dllName).Wait();
-
-            Assert.Pass();
-        }
-
-        [Test, Order(3)]
-        public void IsExities()
-        {
-            var service = serviceProvider.GetService<IFileSystem>();
-            var r = service.IsExities(directory + @"/" + dllName).Result;
-            if (r)
+            service.DeleteAll().Wait();
+            var q = service.GetList().Result;
+            if (q.Count == 0)
             {
                 Assert.Pass();
             }
             else
             {
                 Assert.Fail();
-            }
-        }
-
-        [Test, Order(4)]
-        public void GetList()
-        {
-            var service = serviceProvider.GetService<IFileSystem>();
-            var lst = service.GetList().Result;
-            Assert.AreEqual(fileName.Count + 1, lst.Count);
-            lst = service.GetList(directory + @"/MelcoreFramework").Result;
-            Assert.AreEqual(1, lst.Count);
-        }
-
-        [Test, Order(5)]
-        public void Get()
-        {
-            var service = serviceProvider.GetService<IFileSystem>();
-            var s = service.Get(directory + @"/" + dllName).Result;
-            if (s == null || s.Length <= 100)
-            {
-                Assert.Fail();
-            }
-            else
-            {
-                Assert.Pass();
             }
         }
 
@@ -127,13 +92,37 @@ namespace MelcoreFramework.FileStored.Minio.Test
             }
         }
 
-        [Test, Order(7)]
-        public void DeleteAll()
+        [Test, Order(5)]
+        public void Get()
         {
             var service = serviceProvider.GetService<IFileSystem>();
-            service.DeleteAll().Wait();
-            var q = service.GetList().Result;
-            if (q.Count == 0)
+            var s = service.Get(directory + @"/" + dllName).Result;
+            if (s == null || s.Length <= 100)
+            {
+                Assert.Fail();
+            }
+            else
+            {
+                Assert.Pass();
+            }
+        }
+
+        [Test, Order(4)]
+        public void GetList()
+        {
+            var service = serviceProvider.GetService<IFileSystem>();
+            var lst = service.GetList().Result;
+            Assert.AreEqual(fileName.Count + 1, lst.Count);
+            lst = service.GetList(directory + @"/MelcoreFramework").Result;
+            Assert.AreEqual(1, lst.Count);
+        }
+
+        [Test, Order(3)]
+        public void IsExities()
+        {
+            var service = serviceProvider.GetService<IFileSystem>();
+            var r = service.IsExities(directory + @"/" + dllName).Result;
+            if (r)
             {
                 Assert.Pass();
             }
@@ -142,5 +131,30 @@ namespace MelcoreFramework.FileStored.Minio.Test
                 Assert.Fail();
             }
         }
+
+        [Test, Order(2)]
+        public void SavePhysicalFile()
+        {
+            var service = serviceProvider.GetService<IFileSystem>();
+            service.SaveFile(System.IO.Path.Combine(TestContext.CurrentContext.TestDirectory, dllName), directory + @"/" + dllName).Wait();
+
+            Assert.Pass();
+        }
+
+        [Test, Order(1)]
+        public void SaveStreamFile()
+        {
+            var service = serviceProvider.GetService<IFileSystem>();
+            foreach (var item in fileName)
+            {
+                byte[] byteArray = Encoding.ASCII.GetBytes(Guid.NewGuid().ToString("N"));
+                using MemoryStream stream = new MemoryStream(byteArray);
+                service.SaveFile(stream, directory + @"/" + item + ".txt").Wait();
+            }
+
+            Assert.Pass();
+        }
+
+        #endregion Public Methods
     }
 }

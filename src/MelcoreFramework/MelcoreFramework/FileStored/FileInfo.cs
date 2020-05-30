@@ -2,6 +2,8 @@
 {
     public class FileInfo : IFileInfo
     {
+        #region Public Properties
+
         /// <summary>
         /// Dosyanın Kovası / Klasörü
         /// </summary>
@@ -21,5 +23,7 @@
         /// Dosyanın Büyüklüğü
         /// </summary>
         public long Size { get; set; }
+
+        #endregion Public Properties
     }
 }

@@ -2,8 +2,10 @@
 
 namespace MelcoreFramework.Cache
 {
-    internal interface IMelcoreCache
+    public interface IMelcoreCache
     {
+        #region Public Methods
+
         /// <summary>
         /// Cache e Veri eklemek için kullanılır
         /// </summary>
@@ -41,5 +43,7 @@ namespace MelcoreFramework.Cache
         /// <param name="pattern">Silinmesi istenen verinin patenti</param>
         /// <returns>task</returns>
         Task RemoveByPattern(string pattern);
+
+        #endregion Public Methods
     }
 }

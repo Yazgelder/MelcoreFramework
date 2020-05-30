@@ -2,6 +2,8 @@
 {
     public interface IFileInfo
     {
+        #region Public Properties
+
         /// <summary>
         /// Dosyanın Kovası / Klasörü
         /// </summary>
@@ -21,5 +23,7 @@
         /// Dosyanın Büyüklüğü
         /// </summary>
         long Size { get; set; }
+
+        #endregion Public Properties
     }
 }

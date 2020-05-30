@@ -13,13 +13,14 @@ namespace MelcoreFramework.FileStored.AmazonS3.Concrete
 {
     public class AmazonS3FileStored : IFileSystem
     {
+        #region Private Fields
+
         private readonly FileSystemParameter _fileParameter;
         private readonly AmazonS3Client _s3Client;
 
-        private int MB
-        {
-            get { return Convert.ToInt32(Math.Pow(2, 20)); }
-        }
+        #endregion Private Fields
+
+        #region Public Constructors
 
         public AmazonS3FileStored(IOptions<FileSystemParameter> fileParameter)
         {
@@ -35,6 +36,23 @@ namespace MelcoreFramework.FileStored.AmazonS3.Concrete
 
             _s3Client = new AmazonS3Client(_fileParameter.AccessKey, _fileParameter.SecretKey, q);
         }
+
+        #endregion Public Constructors
+
+
+
+        #region Private Properties
+
+        private int MB
+        {
+            get { return Convert.ToInt32(Math.Pow(2, 20)); }
+        }
+
+        #endregion Private Properties
+
+
+
+        #region Public Methods
 
         public Task DeleteAll()
         {
@@ -167,6 +185,12 @@ namespace MelcoreFramework.FileStored.AmazonS3.Concrete
             return Task.CompletedTask;
         }
 
+        #endregion Public Methods
+
+
+
+        #region Private Methods
+
         private List<IFileInfo> GetDirectories(string prefix)
         {
             List<IFileInfo> list = new List<IFileInfo>();
@@ -190,5 +214,7 @@ namespace MelcoreFramework.FileStored.AmazonS3.Concrete
 
             return list;
         }
+
+        #endregion Private Methods
     }
 }

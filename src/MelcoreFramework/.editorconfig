@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# S2436: Types and methods should not have too many generic parameters
+dotnet_diagnostic.S2436.severity = silent

@@ -12,8 +12,14 @@ namespace MelcoreFramework.FileStored.Minio.Concrete
 {
     public class MinioFileStored : IFileSystem
     {
+        #region Private Fields
+
         private readonly FileSystemParameter _fileParameter;
         private readonly MinioClient _minioClient;
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         public MinioFileStored(IOptions<FileSystemParameter> fileParameter)
         {
@@ -23,6 +29,12 @@ namespace MelcoreFramework.FileStored.Minio.Concrete
             if (_fileParameter.IsSSL)
                 _minioClient = _minioClient.WithSSL();
         }
+
+        #endregion Public Constructors
+
+
+
+        #region Public Methods
 
         public Task DeleteAll()
         {
@@ -98,6 +110,21 @@ namespace MelcoreFramework.FileStored.Minio.Concrete
             return Task.CompletedTask;
         }
 
+        #endregion Public Methods
+
+
+
+        #region Private Methods
+
+        private void CheckAndCreadBucket(string bucket)
+        {
+            bool found = _minioClient.BucketExistsAsync(bucket).Result;
+            if (!found)
+            {
+                _minioClient.MakeBucketAsync(bucket);
+            }
+        }
+
         private List<IFileInfo> GetDirectories(string prefix)
         {
             List<IFileInfo> list = new List<IFileInfo>();
@@ -110,13 +137,6 @@ namespace MelcoreFramework.FileStored.Minio.Concrete
             return list;
         }
 
-        private void CheckAndCreadBucket(string bucket)
-        {
-            bool found = _minioClient.BucketExistsAsync(bucket).Result;
-            if (!found)
-            {
-                _minioClient.MakeBucketAsync(bucket);
-            }
-        }
+        #endregion Private Methods
     }
 }

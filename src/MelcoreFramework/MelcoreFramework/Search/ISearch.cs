@@ -5,8 +5,12 @@ namespace MelcoreFramework.Search
 {
     public interface ISearch
     {
-        Task Register<T>(string key, List<T> value);
+        #region Public Methods
 
         Task<T> Get<T>(string key);
+
+        Task Register<T>(string key, List<T> value);
+
+        #endregion Public Methods
     }
 }
