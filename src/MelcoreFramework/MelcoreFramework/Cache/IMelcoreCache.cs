@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
 namespace MelcoreFramework.Cache
 {
@@ -14,13 +15,8 @@ namespace MelcoreFramework.Cache
         /// <param name="data">Sistemde tutulacak veri</param>
         /// <param name="timeOut">Sistemde tutulacak dakika süresi</param>
         /// <returns>task</returns>
-        Task Add<T>(string key, T data, int timeOut);
-
-        /// <summary>
-        /// Tüm Cache i temizle
-        /// </summary>
-        /// <returns>task</returns>
-        Task Clear();
+        Task Add<T>(string key, T data, int timeOut, CancellationToken token = default(CancellationToken));
+ 
 
         /// <summary>
         /// verilen tip ve keye göre datayı getirir
@@ -28,21 +24,15 @@ namespace MelcoreFramework.Cache
         /// <typeparam name="T">Almak istenilen verinin tipi</typeparam>
         /// <param name="key">Almak istenen verinin takma adı</param>
         /// <returns>İstenen veri objesi</returns>
-        Task<T> Get<T>(string key);
+        Task<T> Get<T>(string key, CancellationToken token = default(CancellationToken));
 
         /// <summary>
         /// Cache içersinde verilen takma adına göre kaydı siler
         /// </summary>
         /// <param name="key">Silinmesi istenen verinin takma adı</param>
         /// <returns>task</returns>
-        Task Remove(string key);
-
-        /// <summary>
-        /// Cache içerisinde verilen patente göre silme işlemi gerçekleştiri
-        /// </summary>
-        /// <param name="pattern">Silinmesi istenen verinin patenti</param>
-        /// <returns>task</returns>
-        Task RemoveByPattern(string pattern);
+        Task Remove(string key, CancellationToken token = default(CancellationToken));
+ 
 
         #endregion Public Methods
     }

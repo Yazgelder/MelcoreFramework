@@ -9,8 +9,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cache", "Cache", "{B5D6970B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FileStored", "FileStored", "{6D46D349-E6C4-4EE3-867F-88AFDE919752}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Loger", "Loger", "{63400DC5-46F9-4AC2-B561-0A44FF9D6ABE}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{CDCAF95A-9CFD-4AB0-836B-5709AFA04BB1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MessageBroker", "MessageBroker", "{0831A7E6-7E26-460D-AD17-F34C9D6ABC35}"
@@ -40,7 +38,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{86C99E08-4499-49FE-9284-76DBD700752D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MelcoreFramework.Database.Test", "Database\MelcoreFramework.Database.Test\MelcoreFramework.Database.Test.csproj", "{1CECF642-A00A-43A0-867A-E00F857060C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MelcoreFramework.Database.Test", "Database\MelcoreFramework.Database.Test\MelcoreFramework.Database.Test.csproj", "{1CECF642-A00A-43A0-867A-E00F857060C9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logger", "Logger", "{2DFE9088-B987-4AAC-94C1-59F5CE74F3D0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MelcoreFramework.Logger.ElasticSearch", "Loger\MelcoreFramework.Logger.ElasticSearch\MelcoreFramework.Logger.ElasticSearch.csproj", "{087162EE-ECB3-4B3B-8AFB-56976F665EFB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MelcoreFramework.Presentation.Web", "Presentation\MelcoreFramework.Presentation.Web\MelcoreFramework.Presentation.Web.csproj", "{2DEC0F03-93E4-44A5-8667-858BF420BD8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MelcoreFramework.Logger.File", "Loger\MelcoreFramework.Logger.File\MelcoreFramework.Logger.File.csproj", "{5F16E4A6-3190-41C4-8CD3-AD904A416ABA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MelcoreFramework.Cache.Memory", "Cache\MelcoreFramework.Cache.Memory\MelcoreFramework.Cache.Memory.csproj", "{18855B18-939C-434A-A185-734F09923D06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MelcoreFramework.Cache.Redis", "Cache\MelcoreFramework.Cache.Redis\MelcoreFramework.Cache.Redis.csproj", "{E18CD64C-2DFA-4052-BB76-A2CE76716B88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -80,6 +90,26 @@ Global
 		{1CECF642-A00A-43A0-867A-E00F857060C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CECF642-A00A-43A0-867A-E00F857060C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CECF642-A00A-43A0-867A-E00F857060C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{087162EE-ECB3-4B3B-8AFB-56976F665EFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{087162EE-ECB3-4B3B-8AFB-56976F665EFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{087162EE-ECB3-4B3B-8AFB-56976F665EFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{087162EE-ECB3-4B3B-8AFB-56976F665EFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DEC0F03-93E4-44A5-8667-858BF420BD8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DEC0F03-93E4-44A5-8667-858BF420BD8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DEC0F03-93E4-44A5-8667-858BF420BD8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DEC0F03-93E4-44A5-8667-858BF420BD8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F16E4A6-3190-41C4-8CD3-AD904A416ABA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F16E4A6-3190-41C4-8CD3-AD904A416ABA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F16E4A6-3190-41C4-8CD3-AD904A416ABA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F16E4A6-3190-41C4-8CD3-AD904A416ABA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18855B18-939C-434A-A185-734F09923D06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18855B18-939C-434A-A185-734F09923D06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18855B18-939C-434A-A185-734F09923D06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18855B18-939C-434A-A185-734F09923D06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E18CD64C-2DFA-4052-BB76-A2CE76716B88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E18CD64C-2DFA-4052-BB76-A2CE76716B88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E18CD64C-2DFA-4052-BB76-A2CE76716B88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E18CD64C-2DFA-4052-BB76-A2CE76716B88}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,6 +122,10 @@ Global
 		{0CCF9E8F-4BFB-455F-A1CF-A2C678C87641} = {6D46D349-E6C4-4EE3-867F-88AFDE919752}
 		{422BDE4F-B5B3-4BAC-AECD-C236ACA9FE47} = {6D46D349-E6C4-4EE3-867F-88AFDE919752}
 		{1CECF642-A00A-43A0-867A-E00F857060C9} = {86C99E08-4499-49FE-9284-76DBD700752D}
+		{087162EE-ECB3-4B3B-8AFB-56976F665EFB} = {2DFE9088-B987-4AAC-94C1-59F5CE74F3D0}
+		{5F16E4A6-3190-41C4-8CD3-AD904A416ABA} = {2DFE9088-B987-4AAC-94C1-59F5CE74F3D0}
+		{18855B18-939C-434A-A185-734F09923D06} = {B5D6970B-DAE7-42B4-808F-158A832091D3}
+		{E18CD64C-2DFA-4052-BB76-A2CE76716B88} = {B5D6970B-DAE7-42B4-808F-158A832091D3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7FABCA78-763A-48C8-8991-4B96AE2B8896}
